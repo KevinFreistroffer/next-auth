@@ -1,7 +1,9 @@
 "use server";
 
+import { db } from "@/drizzle/db";
+import { users } from "@/drizzle/schema";
 import { UserSchema } from "./_lib/definitions";
-import bcrypt from "bcrypt"
+import bcrypt from "bcrypt";
 
 export async function signup(state: any, formData: FormData) {
   console.log("signup action state=", state);
@@ -9,7 +11,11 @@ export async function signup(state: any, formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const validationResult = UserSchema.safeParse({ name: formData.get('name'), email: formData.get('email'), password: formData.get('password') });
+  const validationResult = UserSchema.safeParse({
+    name: formData.get("name"),
+    email: formData.get("email"),
+    password: formData.get("password"),
+  });
 
   if (!validationResult.success) {
     // console.log("Valid form data", result.data);
@@ -19,9 +25,21 @@ export async function signup(state: any, formData: FormData) {
       errors: validationResult.error.flatten().fieldErrors,
     };
   } else {
-    const { name, email, password} = validationResult.data;
+    const { name, email, password } = validationResult.data;
     const hashedPassword = await bcrypt.hash(password, 10);
-    console.log('hashedPassword', hashedPassword);
-    return null;
+
+    const data = await db
+      .insert(users)
+      .values({
+        name,
+        email,
+        password: hashedPassword,
+      })
+      .returning({ id: users.id });
+    console.log("INSERT user data=", data);
+
+    const user = data[0];
+    console.log("INSERT user=", user);
+    // Session
   }
 }
