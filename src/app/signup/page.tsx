@@ -73,10 +73,11 @@ const Page: React.FC = () => {
           </div>
 
           <button
+            disabled={pending}
             className={`${styles["submit-button"]} rounded p-3`}
             type="submit"
           >
-            Sign Up
+           {pending ?  "Sign you up..." : "Sign up"}
           </button>
         </form>
       </div>

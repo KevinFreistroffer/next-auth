@@ -1,6 +1,7 @@
 "use server";
 
 import { UserSchema } from "./_lib/definitions";
+import bcrypt from "bcrypt"
 
 export async function signup(state: any, formData: FormData) {
   console.log("signup action state=", state);
@@ -8,17 +9,19 @@ export async function signup(state: any, formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const result = UserSchema.safeParse({ name, email, password });
+  const validationResult = UserSchema.safeParse({ name: formData.get('name'), email: formData.get('email'), password: formData.get('password') });
 
-  if (!result.success) {
+  if (!validationResult.success) {
     // console.log("Valid form data", result.data);
-    console.log(result.error);
-    console.log(result.error.flatten());
+    console.log(validationResult.error);
+    console.log(validationResult.error.flatten());
     return {
-      errors: result.error.flatten().fieldErrors,
+      errors: validationResult.error.flatten().fieldErrors,
     };
   } else {
-    // console.error("Invalid form data", result.error);
+    const { name, email, password} = validationResult.data;
+    const hashedPassword = await bcrypt.hash(password, 10);
+    console.log('hashedPassword', hashedPassword);
     return null;
   }
 }
