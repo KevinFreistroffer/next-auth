@@ -1,0 +1,5 @@
+@scope (.container) to (.content) {
+  p {
+    color: red;
+  }
+}
