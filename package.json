@@ -13,6 +13,7 @@
     "@vercel/postgres": "^0.8.0",
     "bcrypt": "^5.1.1",
     "drizzle-orm": "^0.25.4-dadcac0",
+    "jose": "^5.4.1",
     "next": "^14.3.0-canary.67",
     "react": "19.0.0-rc-e684ca66ab-20240619",
     "react-dom": "19.0.0-rc-e684ca66ab-20240619",
