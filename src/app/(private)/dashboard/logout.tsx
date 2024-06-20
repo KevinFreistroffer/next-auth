@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { logout } from "../auth/auth";
+import { logout } from "../../auth/auth";
 
 const LogoutButton: React.FC = () => {
   const handleLogout = () => {

@@ -2,9 +2,9 @@
 
 import React, { useActionState, useEffect, useState } from "react";
 import { signup } from "@/app/actions";
-import styles from "@/app/signup/styles.module.css";
-import { login } from "../auth/auth";
-import { LoginFormState } from "../auth/definitions";
+import styles from "./styles.module.css";
+import { login } from "../../auth/auth";
+import { LoginFormState } from "../../auth/definitions";
 
 type State = {
   errors: {
@@ -70,7 +70,7 @@ const Page: React.FC = () => {
             className={`${styles["submit-button"]} rounded p-3`}
             type="submit"
           >
-            {pending ? "Loggin you in..." : "Login"}
+            {pending ? "Logging you in..." : "Login"}
           </button>
         </form>
       </div>

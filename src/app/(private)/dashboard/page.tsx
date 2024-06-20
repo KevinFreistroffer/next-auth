@@ -1,5 +1,5 @@
 import React from "react";
-import { logout } from "../auth/auth";
+import { logout } from "../../auth/auth";
 import LogoutButton from "./logout";
 
 const Dashboard: React.FC = async () => {

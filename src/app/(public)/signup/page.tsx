@@ -2,8 +2,8 @@
 
 import React, { useActionState, useEffect, useState } from "react";
 import { signup } from "@/app/actions";
-import styles from "@/app/signup/styles.module.css";
-import { SignUpFormState } from "../auth/definitions";
+import styles from "./styles.module.css";
+import { SignUpFormState } from "../../auth/definitions";
 import Errors from "@/app/components/Errors";
 
 type Payload = any;

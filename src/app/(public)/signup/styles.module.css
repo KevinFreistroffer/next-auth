@@ -1,0 +1,40 @@
+.page {
+  padding: 5rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+
+.form-container {
+  width: 34srem;
+  background-color: black;
+  
+}
+
+.h2 {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.h3 {
+}
+
+.input {
+  width: 100%;
+  padding: 1rem;
+}
+
+.input:last-child {
+  margin-bottom: 2rem;
+}
+
+.submit-button {
+  background-color: rgb(114 139 171);
+  color: black;
+  transition: all 0.1s linear;
+
+  &:hover {
+    background-color: rgb(118, 153, 199);
+  }
+}
