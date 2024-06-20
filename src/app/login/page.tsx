@@ -3,14 +3,21 @@
 import React, { useActionState, useEffect, useState } from "react";
 import { signup } from "@/app/actions";
 import styles from "@/app/signup/styles.module.css";
-import { SignUpFormState } from "../auth/definitions";
-import Errors from "@/app/components/Errors";
+import { login } from "../auth/auth";
+import { LoginFormState } from "../auth/definitions";
+
+type State = {
+  errors: {
+    email?: string[] | undefined;
+    password?: string[] | undefined;
+  };
+} | null;
 
 type Payload = any;
 
 const Page: React.FC = () => {
-  const [state, action, pending] = useActionState<SignUpFormState, Payload>(
-    signup,
+  const [state, action, pending] = useActionState<LoginFormState, Payload>(
+    login,
     undefined
   );
 
@@ -27,23 +34,12 @@ const Page: React.FC = () => {
         <h2
           className={`${styles["h2"]} text-2xl text-white font-bold text-center`}
         >
-          Create an account
+          Login
         </h2>
         <h3 className="text-gray-300 mt-3 mb-6 text-center">
-          Enter your information to get started
+          Enter your information
         </h3>
         <form className={`${styles["form"]} flex flex-col`} action={action}>
-          <div className={`${styles["form-field"]}`}>
-            <input
-              className={`${styles["input"]} rounded`}
-              type="name"
-              placeholder="Name"
-              name="name"
-            />
-            {state?.errors?.name ? (
-              <Errors errors={state?.errors.name} />
-            ) : null}
-          </div>
           <div className={`${styles["form-field"]}`}>
             <input
               className={`${styles["input"]} rounded`}
@@ -51,9 +47,9 @@ const Page: React.FC = () => {
               placeholder="Email"
               name="email"
             />
-            {state?.errors?.email ? (
-              <Errors errors={state?.errors.email} />
-            ) : null}
+            {state?.errors?.email && (
+              <p className="text-red-400 mt-1 mb-4">{state.errors.email}</p>
+            )}
           </div>
 
           <div className={`${styles["form-field"]}`}>
@@ -64,9 +60,9 @@ const Page: React.FC = () => {
               placeholder="Password"
               name="password"
             />
-            {state?.errors?.password ? (
-              <Errors errors={state?.errors.password} />
-            ) : null}
+            {state?.errors?.password && (
+              <p className="text-red-400 mt-1 mb-6">{state.errors.password}</p>
+            )}
           </div>
 
           <button
@@ -74,7 +70,7 @@ const Page: React.FC = () => {
             className={`${styles["submit-button"]} rounded p-3`}
             type="submit"
           >
-            {pending ? "Sign you up..." : "Sign up"}
+            {pending ? "Loggin you in..." : "Login"}
           </button>
         </form>
       </div>

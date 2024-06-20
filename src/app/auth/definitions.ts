@@ -22,7 +22,7 @@ export const LoginFormSchema = z.object({
   password: z.string().min(1, { message: "Password field must not be empty." }),
 });
 
-export type FormState =
+export type SignUpFormState =
   | {
       errors?: {
         name?: string[];
@@ -37,3 +37,13 @@ export type SessionPayload = {
   userId: string | number;
   expiresAt: Date;
 };
+
+export type LoginFormState =
+  | {
+      errors?: {
+        email?: string[];
+        password?: string[];
+      };
+      message?: string;
+    }
+  | undefined;

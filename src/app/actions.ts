@@ -2,7 +2,7 @@
 
 import { db } from "@/drizzle/db";
 import { users } from "@/drizzle/schema";
-import { UserSchema } from "./_lib/definitions";
+import { SignupFormSchema } from "./auth/definitions";
 import bcrypt from "bcrypt";
 
 export async function signup(state: any, formData: FormData) {
@@ -11,7 +11,7 @@ export async function signup(state: any, formData: FormData) {
   const email = formData.get("email");
   const password = formData.get("password");
 
-  const validationResult = UserSchema.safeParse({
+  const validationResult = SignupFormSchema.safeParse({
     name: formData.get("name"),
     email: formData.get("email"),
     password: formData.get("password"),
