@@ -80,13 +80,11 @@ export async function login(
   state: LoginFormState,
   formData: FormData
 ): Promise<LoginFormState> {
-  console.log("login action function", state);
   // 1. Validate form fields
   const validatedFields = LoginFormSchema.safeParse({
     email: formData.get("email"),
     password: formData.get("password"),
   });
-  console.log("login action function", "validatedFields", validatedFields);
   const errorMessage = { message: "Invalid login credentials." };
 
   // If any form fields are invalid, return early
@@ -123,7 +121,6 @@ export async function login(
   // 4. If login successful, create a session for the user and redirect
   const userId = user.id.toString();
   await createSession(userId);
-  console.log("login action function", userId, "createdSession");
 }
 
 export async function logout() {

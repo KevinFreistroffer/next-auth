@@ -1,11 +1,11 @@
 import React from "react";
 
-const AboutPage: React.FC = () => {
+const AboutPage = () => {
   return (
-    <div>
+    <main>
       <h1>About Page</h1>
       <p>Welcome to the About Page!!</p>
-    </div>
+    </main>
   );
 };
 

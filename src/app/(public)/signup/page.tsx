@@ -18,7 +18,7 @@ const Page: React.FC = () => {
     console.log("state=", state);
   }, [state]);
   return (
-    <div
+    <main
       className={`${styles["page"]} flex flex-col justify-center items-center`}
     >
       <div
@@ -78,7 +78,7 @@ const Page: React.FC = () => {
           </button>
         </form>
       </div>
-    </div>
+    </main>
   );
 };
 

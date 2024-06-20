@@ -28,7 +28,6 @@ export async function decrypt(session: string | undefined = "") {
 }
 
 export async function createSession(userId: string) {
-  console.log("createSession()");
   const expiresAt = new Date(Date.now() + 60 * 60 * 1000);
   const session = await encrypt({ userId, expiresAt });
 
@@ -44,7 +43,6 @@ export async function createSession(userId: string) {
 }
 
 export async function verifySession() {
-  console.log("verifySession()");
   const cookie = cookies().get("session")?.value;
   const session = await decrypt(cookie);
 
@@ -56,7 +54,6 @@ export async function verifySession() {
 }
 
 export async function updateSession() {
-  console.log("updateSession()");
   const session = cookies().get("session")?.value;
   const payload = await decrypt(session);
 
@@ -75,7 +72,6 @@ export async function updateSession() {
 }
 
 export function deleteSession() {
-  console.log("deleteSession()");
   cookies().delete("session");
   redirect("/login");
 }

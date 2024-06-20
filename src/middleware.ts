@@ -1,10 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { decrypt } from "@/app/auth/stateless-session";
 import { cookies } from "next/headers";
+import {
+  protectedRoutes as _protectedRoutes,
+  publicRoutes as _publicRoutes,
+} from "./app/(public)/routes";
 
 // 1. Specify protected and public routes
-const protectedRoutes = ["/dashboard"];
-const publicRoutes = ["/login", "/signup", "/"];
+const protectedRoutes: string[] = _protectedRoutes.map(({ route }) => route);
+const publicRoutes: string[] = _publicRoutes.map(({ route }) => route);
 
 export default async function middleware(req: NextRequest) {
   console.log("middleware");
